@@ -147,8 +147,152 @@ http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv
 ```
 
 ### Writing a subscriber with custom ros messages
+First, declarations at the top, with dependenccies and import statements.
+
+```
+#!/usr/bin/env python
+
+#import dependencies
+import rospy
+from hw11.msg import Drive
+import time
+```
+To import your custom message, use
+```
+from <package name>.msg import <message name>
+```
+In this example, that is 
+```
+from hw11.msg import Drive
+```
+Next, we have our callback method which is called everytime new data is published
+```
+def callback(data):
+    #log data
+    rospy.loginfo(rospy.get_caller_id() + "I heard %f for speed and %f for steering", data.speed, data.steering)
+    print("Speed: ", data.speed, " Steering: ", data.steering)
+```
+Here, the variable 'data' represents our custom message coming in.  To distinguish the two data variables, data.speed and data.steering are used.
+
+Next, the listener listens for the message.  Here, 'Drive' is the message the subscriber is looking for from the topic 'chatter.'
+
+```
+def listener():
+    # see ros wiki for more information
+    rospy.init_node('listener', anonymous=True)
+    rospy.Subscriber("chatter", Drive, callback)
+    rospy.spin()
+```
+We also have a main definition that simply calls our subscriber:
+```
+if __name__== '__main__':
+    listener()
+```
+
+Here is the code all together:
+```
+#!/usr/bin/env python
+
+#import dependencies
+import rospy
+from hw11.msg import Drive
+import time
+
+#method will be called when new data is published
+def callback(data):
+    #log data
+    rospy.loginfo(rospy.get_caller_id() + "I heard %f for speed and %f for steering", data.speed, data.steering)
+    print("Speed: ", data.speed, " Steering: ", data.steering)
+def listener():
+    # see ros wiki for more information
+    rospy.init_node('listener', anonymous=True)
+    rospy.Subscriber("chatter", Drive, callback)
+    rospy.spin()
+
+if __name__== '__main__':
+    listener()
+```
 
 ### Writing a publisher with custom ros messages
+
+First, we again have the import statements with our dependencies.  Importing the custom message here is the same as the subscriber.
+```
+#!/usr/bin/env python
+
+#import dependencies
+import rospy
+from hw11.msg import Drive
+
+import logging
+import time
+```
+Next, we set up the node it will be talking to.
+```
+def talker():
+    #set up publisher
+    pub = rospy.Publisher('chatter', Drive)
+    rospy.init_node('cust_talker', anonymous=True)
+    rate = rospy.Rate(1) #1 Hz
+```
+Within that method, we set up the individual variables within our custom message.  Here, the two variables are hardcoded to 0.16 and 0.17, but this can be easily changed.
+```
+    msg = Drive()
+    msg.steering = 0.16
+    msg.speed = 0.17
+```
+Next, we publish the data like in a normal publisher.
+```
+    while not rospy.is_shutdown():
+        #log data from sensor
+        rospy.loginfo(msg)
+        #publish data from sensor
+        pub.publish(msg)
+        #sleep based on Hz from earlier (1 Hz = sleep for 1 second; 2 Hz = sleep for 0.5 seconds; etc)
+        rate.sleep()
+```
+Finally, we have the main method that calls the publisher and exits on an interrupt:
+```
+if __name__ == '__main__':
+    try:
+        talker()
+    except rospy.ROSInterruptException:
+        pass
+```
+
+Here is the code all together:
+
+```
+#!/usr/bin/env python
+
+#import dependencies
+import rospy
+from hw11.msg import Drive
+
+import logging
+import time
+
+def talker():
+    #set up publisher
+    pub = rospy.Publisher('chatter', Drive)
+    rospy.init_node('cust_talker', anonymous=True)
+    rate = rospy.Rate(1) #1 Hz
+    msg = Drive()
+    msg.steering = 0.16
+    msg.speed = 0.17
+    while not rospy.is_shutdown():
+        #log data from sensor
+        rospy.loginfo(msg)
+        #publish data from sensor
+        pub.publish(msg)
+        #sleep based on Hz from earlier (1 Hz = sleep for 1 second; 2 Hz = sleep for 0.5 seconds; etc)
+        rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        talker()
+    except rospy.ROSInterruptException:
+        pass
+```
 
 #### For more information about creating a subscriber and publisher
 ##### Simple Subscribers/Publishers:
