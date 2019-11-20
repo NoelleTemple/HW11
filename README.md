@@ -174,13 +174,13 @@ def callback(data):
 ```
 Here, the variable 'data' represents our custom message coming in.  To distinguish the two data variables, data.speed and data.steering are used.
 
-Next, the listener listens for the message.  Here, 'Drive' is the message the subscriber is looking for from the topic 'chatter.'
+Next, the listener listens for the message.  Here, 'Drive' is the message the subscriber is looking for from the topic 'carcontrol.'
 
 ```
 def listener():
     # see ros wiki for more information
     rospy.init_node('listener', anonymous=True)
-    rospy.Subscriber("chatter", Drive, callback)
+    rospy.Subscriber("carcontrol", Drive, callback)
     rospy.spin()
 ```
 We also have a main definition that simply calls our subscriber:
@@ -206,7 +206,7 @@ def callback(data):
 def listener():
     # see ros wiki for more information
     rospy.init_node('listener', anonymous=True)
-    rospy.Subscriber("chatter", Drive, callback)
+    rospy.Subscriber("carcontrol", Drive, callback)
     rospy.spin()
 
 if __name__== '__main__':
@@ -230,7 +230,7 @@ Next, we set up the node it will be talking to.
 ```
 def talker():
     #set up publisher
-    pub = rospy.Publisher('chatter', Drive)
+    pub = rospy.Publisher('carcontrol', Drive)
     rospy.init_node('cust_talker', anonymous=True)
     rate = rospy.Rate(1) #1 Hz
 ```
@@ -273,7 +273,7 @@ import time
 
 def talker():
     #set up publisher
-    pub = rospy.Publisher('chatter', Drive)
+    pub = rospy.Publisher('carcontrol', Drive)
     rospy.init_node('cust_talker', anonymous=True)
     rate = rospy.Rate(1) #1 Hz
     msg = Drive()
