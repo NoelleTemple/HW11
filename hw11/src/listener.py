@@ -13,7 +13,7 @@ def callback(data):
 def listener():
     # see ros wiki for more information
     rospy.init_node('listener', anonymous=True)
-    rospy.Subscriber("chatter", Drive, callback)
+    rospy.Subscriber("carcontrol", Drive, callback)
     rospy.spin()
 
 if __name__== '__main__':
