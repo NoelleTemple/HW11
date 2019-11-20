@@ -146,7 +146,15 @@ catkin_make install
 http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv
 ```
 
-For the sub/pub
+### Writing a subscriber with custom ros messages
+
+### Writing a publisher with custom ros messages
+
+#### For more information about creating a subscriber and publisher
+##### Simple Subscribers/Publishers:
+http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29
+
+##### Custom Subscribers/Publishers:
 http://wiki.ros.org/ROS/Tutorials/CustomMessagePublisherSubscriber%28python%29
 	
 	
