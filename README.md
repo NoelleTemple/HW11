@@ -92,7 +92,7 @@ catkin_package(
 Also uncomment this and edit
 
 ```
-  # add_message_files(
+# add_message_files(
 #   FILES
 #   Message1.msg
 #   Message2.msg
@@ -107,7 +107,7 @@ add_message_files(
 ```
 Uncomment this:
 ```
-	# generate_messages(
+# generate_messages(
 #   DEPENDENCIES
 #   std_msgs
 # )
