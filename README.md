@@ -142,9 +142,8 @@ catkin_make install
 ```
 
 #### For more information about creating custom ROS messages:
-```
 http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv
-```
+
 
 ### Writing a subscriber with custom ros messages
 First, declarations at the top, with dependenccies and import statements.
