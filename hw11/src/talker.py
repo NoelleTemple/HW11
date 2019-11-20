@@ -9,7 +9,7 @@ import time
 
 def talker():
     #set up publisher
-    pub = rospy.Publisher('chatter', Drive)
+    pub = rospy.Publisher('carcontrol', Drive)
     rospy.init_node('cust_talker', anonymous=True)
     rate = rospy.Rate(1) #1 Hz
     msg = Drive()
