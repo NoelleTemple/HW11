@@ -11,7 +11,7 @@ For this scenario, the variables 'speed' and 'steering' will be sent together, s
 cd ~/catkin_ws/src/hw11/
 mkdir msg
 cd msg
-nano Drive.py
+nano Drive.msg
 ```
 
 Both 'steering' and 'speed' are floats, so we populate the file with the variable type and its name:
